@@ -32,6 +32,25 @@ LazyVim is a personalized distribution of Neovim (nvim), tailored to provide a s
 
 4. Restart Neovim to apply the changes.
 
+## Some of the custom shortcut of telescope
+
+| KEY | DESCRIPTION                                                                                                 | MODE |
+| --- | ----------------------------------------------------------------------------------------------------------- | ---- |
+| ;f  | Lists files in your current working directory, respects .gitignore                                          | n    |
+| ;r  | Search for a string in your current working directory and get results live as you type, respects .gitignore | n    |
+| \\  | Lists open buffers                                                                                          | n    |
+| ;t  | Lists available help tags and opens a new window with the relevant help info on <cr>                        | n    |
+| ;;  | Resume the previous telescope picker                                                                        | n    |
+| ;e  | Lists Diagnostics for all open buffers or a specific buffer                                                 | n    |
+| ;s  | Lists Function names, variables, from Treesitter                                                            | n    |
+| sf  | Open File Browser with the path of the current buffer                                                       |      |
+
+| KEY | DESCRIPTION                           | MODE |
+| --- | ------------------------------------- | ---- |
+| N   | Create a new file                     | n    |
+| h   | Go to parent directory                | n    |
+| /   | Enter the insert mode to search files | n    |
+
 ## Customization
 
 LazyVim is designed to be easily customizable. You can modify themes, add or remove plugins, and tweak settings according to your preferences. The configuration files are well-organized and commented for easy understanding.

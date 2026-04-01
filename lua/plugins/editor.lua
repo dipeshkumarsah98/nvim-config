@@ -2,8 +2,8 @@ return {
   {
     enabled = false,
     "folke/flash.nvim",
+    ---@type Flash.Config
     opts = {
-      ---@type Flash.Config
       search = {
         forward = true,
         multi_window = false,
@@ -14,7 +14,7 @@ return {
   },
 
   {
-    "echasnovski/mini.hipatterns",
+    "nvim-mini/mini.hipatterns",
     event = "BufReadPre",
     opts = {
       highlighters = {
@@ -81,8 +81,7 @@ return {
           local builtin = require("telescope.builtin")
           builtin.live_grep()
         end,
-        desc =
-        "Search for a string in your current working directory and get results live as you type, respects .gitignore",
+        desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
       },
       {
         "\\\\",
@@ -157,12 +156,33 @@ return {
         layout_strategy = "horizontal",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
+        vimgrep_arguments = {
+          "fd",
+          "-uu",
+        },
+
         winblend = 0,
         mappings = {
           n = {},
         },
       })
       opts.pickers = {
+        find_files = {
+          hidden = true,
+        },
+        find_command = {
+          "rg",
+          "--files",
+          "--hidden",
+          "--glob=!**/.git/*",
+          "--glob=!**/.idea/*",
+          "--glob=!**/.vscode/*",
+          "--glob=!**/build/*",
+          "--glob=!**/dist/*",
+          "--glob=!**/yarn.lock",
+          "--glob=!**/package-lock.json",
+        },
+
         diagnostics = {
           theme = "ivy",
           initial_mode = "normal",

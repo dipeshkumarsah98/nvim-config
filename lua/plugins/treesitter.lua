@@ -1,6 +1,5 @@
 return {
-  { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-
+  { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle", update = ":TSUpdate" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -52,16 +51,27 @@ return {
         },
       },
     },
+    event = { "BufReadPost", "BufNewFile" },
+    build = ":TSUpdate",
+    -- let lazy.nvim handle setup via opts; this avoids module lookup errors if plugin isn't loaded yet
+    -- and ensures the config is applied in the expected LazyVim lifecycle.
+    -- note: register mdx after setup via config hook only if treesitter module exists.
     config = function(_, opts)
+      local ok = pcall(require, "nvim-treesitter.configs")
+      if not ok then
+        vim.notify("nvim-treesitter not installed or not yet available", vim.log.levels.WARN)
+        return
+      end
       require("nvim-treesitter.configs").setup(opts)
 
-      -- MDX
       vim.filetype.add({
         extension = {
           mdx = "mdx",
         },
       })
-      vim.treesitter.language.register("markdown", "mdx")
+      if vim.treesitter and vim.treesitter.language then
+        vim.treesitter.language.register("markdown", "mdx")
+      end
     end,
   },
 }
